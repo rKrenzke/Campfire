@@ -1,0 +1,57 @@
+#siteImage{
+    width: 250px;
+    height: 250px;
+}
+
+#mainDiv{
+    background-image: url(../assets/landing.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;   
+    width: 100vw;
+    height: 155vh;
+    
+}
+
+#siteResults{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-family: "Montserrat", sans-serif;
+    
+}
+
+#amenitiesIcons{
+    display: flex;
+    margin-top: 5px;
+}
+
+#amenitiesIcons div{
+    margin: 0px 15px;
+    border-radius: 10px;
+    font-size: 24px;
+    width: 40px;
+    height:40px;
+    text-shadow: 1px 1px black;;
+    text-align: center;
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
+    0 100px 80px rgba(0, 0, 0, 0.07);
+    color: white;
+}
+
+#signal{
+    background-color: rgb(28, 165, 62);
+}
+
+#fire{
+    background-color: rgb(218, 68, 49);
+}
+#water{
+    background-color: rgb(28, 110, 165);
+}
+#shower{
+    background-color: rgb(168, 190, 42);
+}
+#toilet{
+    background-color: rgb(29, 34, 1);
+}
