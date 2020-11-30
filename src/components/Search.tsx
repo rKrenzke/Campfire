@@ -1,6 +1,5 @@
 import React from 'react';
 import {Container, Button, Col, CardImg, Card, CardBody, CardHeader, Row, CardFooter} from 'reactstrap';
-import './DisplayCampsites';
 import '../styles/Search.css';
 import Extras from './Extras';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
