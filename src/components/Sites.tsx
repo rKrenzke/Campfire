@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Col,
-  Container, Card, CardBody, CardHeader, CardFooter, Button, Modal, ModalBody
+  Container, Card, CardBody, CardHeader, CardFooter, Button, Modal, ModalBody, Form, Input
 } from "reactstrap";
 import PackList from './PackList';
 // import { useToasts } from "react-toast-notifications";
@@ -17,7 +17,7 @@ type SearchState = {
     updateActive: boolean,
     tripToUpdate: object,
     packItem: string,
-    packListItems: Array<object>
+    packListItems: Array<object>,
 }
 
 class MySites extends React.Component<AcceptProps, SearchState>{ 
@@ -34,7 +34,7 @@ class MySites extends React.Component<AcceptProps, SearchState>{
           updateActive: false,
           tripToUpdate: {},
           packItem: '',
-          packListItems: []
+          packListItems: [] 
       }
   }
 
@@ -86,7 +86,6 @@ class MySites extends React.Component<AcceptProps, SearchState>{
           if (data.error) {
             console.log(data.error.message);
           } else{
-              alert("Item Saved!")
               this.fetchPackList(tripId);
               //TODO: add toast
           }
@@ -136,6 +135,7 @@ class MySites extends React.Component<AcceptProps, SearchState>{
 //   const { addToast } = useToasts();
  
 render(){
+  {console.log(this.props.user)}
   return (
     <div>
       <div id="siteCards">
@@ -150,21 +150,64 @@ render(){
                     </CardHeader>
                     <CardBody className="cardBody">
                         <p>{site.siteDescription}</p>
-              <p>{site.nites ? <b>{`Reserve for ${site.nites} nights`}</b> : <Button>How many nights?</Button>}</p>
-              <Col>
-              <table>
-                <thead>Pack List</thead>
-                  <tr>
-                    <th>Item</th>
-                    <th>Who</th>
-                  </tr>
-                  {this.state.packListItems.length > 0 ? <PackList packList={this.state.packListItems} getItems={this.fetchPackList} token={this.props.token}/> : this.fetchPackList(site.id)}
-                  <tr>
-                    <input type="text" id="newItem" placeholder="Add new pack item" value={this.state.packItem} onChange={this.handleChange.bind(this)}/>
-                    <Button color="success" onClick={() => this.addPackItem(site.id, this.state.packItem )}> + </Button>
-                  </tr>
-              </table>
-          </Col>
+                        <hr/>
+                        <div className="row">
+                        <Col className="col align-self-start">
+                          <Form>
+                            <h6>Fee Calculator</h6>
+                            <Input type="number" placeholder="Site fee per night"></Input>
+                            <Input type="number" placeholder="# of campers"></Input>
+                            <Input type="number" placeholder="# of nights"></Input>
+                          </Form>
+                          <hr/>
+                          <div className="input-group mb-3">
+                            <div className="input-group=prepend">
+                              <div className="input-group-text">
+                                <input type="checkbox" checked={false} aria-label="reservation" value="reservation"/>
+                              </div>
+                            </div>
+                            <label htmlFor="reservation">Campsite reserved</label>
+                          </div>
+                          <div className="input-group mb-3">
+                            <div className="input-group=prepend">
+                              <div className="input-group-text">
+                                <input type="checkbox" aria-label="recPassport" value="recPassport"/>
+                              </div>
+                            </div>
+                            <label htmlFor="recPassport">Recreation Passport <i>(State parks only)</i></label>
+                          </div>
+                          <div className="input-group mb-3">
+                            <div className="input-group=prepend">
+                              <div className="input-group-text">
+                                <input type="checkbox" aria-label="reservation" value="reservation"/>
+                              </div>
+                            </div>
+                            <label htmlFor="reservation">Fire restrictions</label>
+                          </div>
+                          <div className="input-group mb-3">
+                            <div className="input-group=prepend">
+                              <div className="input-group-text">
+                                <input type="checkbox" aria-label="rustic" value="rustic"/>
+                              </div>
+                            </div>
+                            <label htmlFor="rustic">Rustic site</label>
+                          </div>
+                        </Col>
+                        <Col className="col align-self-end">
+                          <table>
+                            <thead>Pack List</thead>
+                              <tr>
+                                <th>Item</th>
+                                <th>Who</th>
+                              </tr>
+                              {this.state.packListItems.length > 0 ? <PackList packList={this.state.packListItems} getItems={this.fetchPackList} token={this.props.token}/> : /*<p>Create a Pack List</p>*/ this.fetchPackList(site.id)}
+                              <tr>
+                                <input type="text" id="newItem" placeholder="Add new pack item" value={this.state.packItem} onChange={this.handleChange.bind(this)}/>
+                                <Button color="success" onClick={() => this.addPackItem(site.id, this.state.packItem )}> + </Button>
+                              </tr>
+                          </table>
+                        </Col>
+                        </div>
                     </CardBody>
                     <CardFooter className="cardFooter">
                       <Col id="updateCol" md="6">
@@ -174,7 +217,7 @@ render(){
                             this.updateOn();
                           }}
                         >
-                          Edit
+                          Save Changes
                         </Button>
                       </Col>
                       <Col id="deleteCol" md="6">

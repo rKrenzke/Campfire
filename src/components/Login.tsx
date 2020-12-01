@@ -27,6 +27,7 @@ class Login extends React.Component<PassedProps, UserState> {
       };    
   };
 
+
   handleSubmit(event: any){
     event.preventDefault();
     let username = this.state.username;
@@ -45,10 +46,12 @@ class Login extends React.Component<PassedProps, UserState> {
           } else if(data.isAdmin == true){
             this.props.adminStatus();
             this.props.updateToken(data.sessionToken);
-            this.props.setUser(data.user.username);
+            this.props.setUser(this.state.username);
+            console.log(data.isAdmin);
             this.props.close();
           } else {
             this.props.updateToken(data.sessionToken);
+            this.props.setUser(this.state.username);
             this.props.close();
           }
         });

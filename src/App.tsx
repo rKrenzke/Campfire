@@ -50,13 +50,14 @@ const App: React.FunctionComponent = () => {
   const clearToken = () => {
     localStorage.clear();
     setSessionToken("");
+    setUserName("");
     setAdminStatus(false);
     AUTH.isAuthenticated = false;
   };
 
   return (
     <Router>
-      <NavBar updateToken={updateToken} logout={clearToken} isLoggedIn={!!sessionToken} isAdmin={isAdmin} updateStatus={adminStatus} setUserName={userNameFunction}/> 
+      <NavBar updateToken={updateToken} logout={clearToken} isLoggedIn={!!sessionToken} isAdmin={!!isAdmin} updateStatus={adminStatus} setUserName={userNameFunction}/> 
       <Switch>
         <Route path="/search">
           <Search token={sessionToken}/>

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Container, Button, Col, CardImg, Card, CardBody, CardHeader, Row, CardFooter} from 'reactstrap';
 import '../styles/Search.css';
+import NotFound from '../assets/imageNotFound.png';
 import Extras from './Extras';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faFire, faMapPin, faShower, faSignal, faTint, faToilet} from '@fortawesome/free-solid-svg-icons'
@@ -122,6 +123,7 @@ class Search extends React.Component<AcceptProps, SearchState>{
     render(){
         return(
             <div id="mainDiv">
+                <div id="resultsBody">
                 {console.log(this.state.allSites)}
                 {this.state.allSites ? this.state.allSites.data.map((site: any, index: any) =>{ 
                     return <Container id="siteResults">
@@ -132,11 +134,11 @@ class Search extends React.Component<AcceptProps, SearchState>{
                         <CardBody>
                             <Row>                          
                             <Col className="col-md-3">
-                            {site.images.length === 0 ? <p>Site Image Not Available</p> : <img id="siteImage" src={site.images[0].url} className="img-fluid" alt="Campsite"/>}
+                            {site.images.length === 0 ? <img src={NotFound} className="img-fluid" alt="imageNotFound"/> : <img id="siteImage" src={site.images[0].url} className="img-fluid" alt="Campsite"/>}
                             </Col>
                             <Col className="col-md-4">
                             <p>{site.description ? site.description : "Site description not available"}</p>
-                            <tr><a href={site.url}>Park Website</a></tr>
+                            <tr><a href={site.url} target="blank">Park Website</a></tr>
                             </Col>
                             <Col className="col-md-5">                                                           
                             <table>
@@ -147,7 +149,7 @@ class Search extends React.Component<AcceptProps, SearchState>{
                                 </thead>
                                 <tbody>
                                     <tr>                                                               
-                                        <td>{site.operatingHours[0].description ? site.operatingHours[0].description : "Contact for operating hours"}</td>
+                                        <td>{site.operatingHours.length > 0 ? site.operatingHours[0].description : "Contact for operating hours"}</td>
                                     </tr>
                                     <hr/>
                                     <tr>
@@ -159,17 +161,19 @@ class Search extends React.Component<AcceptProps, SearchState>{
                             <div>
                                 <th>Amenities:</th>
                                 <div id="amenitiesIcons">
-                                    <div id="signal" title="Cellphone signal"><FontAwesomeIcon icon={faSignal}></FontAwesomeIcon></div>
-                                    <div id="fire" title="Firewood for sale"><FontAwesomeIcon icon={faFire}></FontAwesomeIcon></div>
-                                    <div id="water" title="Potable water"><FontAwesomeIcon icon={faTint}></FontAwesomeIcon></div>
-                                    <div id="shower" title="Shower wacilities"><FontAwesomeIcon icon={faShower}></FontAwesomeIcon></div>   
-                                    <div id="toilet" title="Toilets available"><FontAwesomeIcon icon={faToilet}></FontAwesomeIcon></div>
+                                    {site.amenities.cellPhoneReception == "No" ? <div id="noSignal" title="No cellphone signal"><FontAwesomeIcon icon={faSignal}></FontAwesomeIcon></div> : <div id="signal" title="Cellphone signal available"><FontAwesomeIcon icon={faSignal}></FontAwesomeIcon></div>}
+                                    {site.amenities.firewoodForSale == "No" ? <div id="noFirewood" title="No firewood for sale"><FontAwesomeIcon icon={faFire}></FontAwesomeIcon></div> : <div id="fire" title="Firewood for sale"><FontAwesomeIcon icon={faFire}></FontAwesomeIcon></div>}
+                                    {site.amenities.potableWater[0] ? <div id="water" title="Potable water available"><FontAwesomeIcon icon={faTint}></FontAwesomeIcon></div> : <div id="noWater" title="No potable water"><FontAwesomeIcon icon={faTint}></FontAwesomeIcon></div>}
+                                    {site.amenities.showers[0] == "None" ? <div id="noShower" title="No shower facilities"><FontAwesomeIcon icon={faShower}></FontAwesomeIcon></div> : <div id="shower" title="Shower facilities available"><FontAwesomeIcon icon={faShower}></FontAwesomeIcon></div>}
+                                    {site.amenities.toilets[0] ? <div id="toilet" title="Toilets available"><FontAwesomeIcon icon={faToilet}></FontAwesomeIcon></div> : <div id="noToilet" title="No toilets available"><FontAwesomeIcon icon={faToilet}></FontAwesomeIcon></div>}
+                                    
                                 </div>
                             </div>
                             <hr/>
                             <div className="moreInfoButtons">
                                 <Button onClick={() => this.extrasModal(site.parkCode)}>Things To Do</Button>
-                                <Button onClick={() => this.createNewTrip(site)} value={site}>Save Campsite</Button>
+                                {this.props.token ? <Button onClick={() => this.createNewTrip(site)} value={site}>Save Campsite</Button> : <></> }
+                                
                             </div>
                         </Col>
                     </Row>
@@ -180,6 +184,7 @@ class Search extends React.Component<AcceptProps, SearchState>{
                 <div id="pageButtons">
                     <Button onClick={this.previousPage}>Previous Sites</Button>
                     <Button onClick={this.nextPage}>More Sites</Button>
+                </div>
                 </div>
             </div>
         )

@@ -5,10 +5,11 @@
 
 #mainDiv{
     background-image: url(../assets/landing.jpg);
-    background-size: cover;
+    background-size: fill;
     background-repeat: no-repeat;   
     width: 100vw;
-    height: 155vh;
+    /* height: 155vh; */
+    margin-top: -5%;
     
 }
 
@@ -17,6 +18,10 @@
     margin-bottom: 20px;
     font-family: "Montserrat", sans-serif;
     
+}
+
+#resultsBody{
+    padding-top: 5%;
 }
 
 #amenitiesIcons{
@@ -43,15 +48,34 @@
     background-color: rgb(28, 165, 62);
 }
 
+#noSignal{
+    background-color: gray;
+}
+
 #fire{
     background-color: rgb(218, 68, 49);
+}
+#noFirewood{
+    background-color: gray;
 }
 #water{
     background-color: rgb(28, 110, 165);
 }
+
+#noWater{
+    background-color: gray;
+}
 #shower{
     background-color: rgb(168, 190, 42);
 }
+
+#noShower{
+    background-color: gray;
+}
 #toilet{
-    background-color: rgb(29, 34, 1);
+    background-color: rgb(221, 147, 35);
+}
+
+#noToilet{
+    background-color: gray;
 }

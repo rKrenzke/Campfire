@@ -23,9 +23,10 @@ class Admin extends React.Component<Props, AdminState>{
         }
     }
 
-    componentDidMount(){
-        this.fetchAllUsers();
-    }
+    // componentDidMount(){
+    //     this.fetchAllUsers();
+    //     console.log(this.props.isAdmin)
+    // }
 
     fetchAllUsers(){
         fetch("http://localhost:4000/user/admin", {
@@ -71,7 +72,6 @@ class Admin extends React.Component<Props, AdminState>{
     
 
     render(){
-
         return(
             <div id="manageUsersTable">
                 <thead>
@@ -85,7 +85,7 @@ class Admin extends React.Component<Props, AdminState>{
                         <th>Modify Privileges</th>
                         <th>Delete User</th>
                     </tr>
-                    {this.state.allUsers.map((user: any) => {
+                    {this.state.allUsers.length > 0 ? this.state.allUsers.map((user: any) => {
                         return <tr>
                                 <td>{user.username}</td>
                                 <td>{user.email}</td>
@@ -93,7 +93,7 @@ class Admin extends React.Component<Props, AdminState>{
                                 <td><Button color="info" onClick={() => this.modifyAdminStatus(user)}>Modify</Button></td>
                                 <td><Button color="danger" onClick={() => this.deleteUserFunction(user)}>X</Button></td>
                             </tr>
-                    })}
+                    }) : this.fetchAllUsers()}
                 </tbody>
             </div>
             
