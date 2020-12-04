@@ -32,7 +32,7 @@ class Login extends React.Component<PassedProps, UserState> {
     event.preventDefault();
     let username = this.state.username;
     let password = this.state.password;
-    fetch("http://localhost:4000/user/login", {
+    fetch("https://micampfire.herokuapp.com/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

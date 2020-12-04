@@ -39,7 +39,7 @@ class UserTripDetails extends Component<AcceptedProps, TripState>{
     fetchPackList = (trip: number) => {
         let tripId = trip;
         if(this.props.token){
-          fetch(`http://localhost:4000/packList/getList/${tripId}`, {
+          fetch(`https://micampfire.herokuapp.com/packList/getList/${tripId}`, {
             method: "GET",
             headers: new Headers({
               "Content-Type": "application/json",
@@ -61,7 +61,7 @@ class UserTripDetails extends Component<AcceptedProps, TripState>{
         let packItem = item;
         // let userName = this.props.user
     
-        fetch(`http://localhost:4000/packList/newPackList`, {
+        fetch("https://micampfire.herokuapp.com/packList/newPackList", {
             method: "POST",
             headers: new Headers({
             "Content-Type": "application/json",
@@ -71,7 +71,7 @@ class UserTripDetails extends Component<AcceptedProps, TripState>{
               packList: {
                 tripId, 
                 packItem, 
-              }, user: null},
+              }, user: {userName: "MountainGoat220"}},
             )
             }).then((response) => response.json())
             .then((data) => {
@@ -91,7 +91,7 @@ class UserTripDetails extends Component<AcceptedProps, TripState>{
         let fireRestrictions = this.state.fireRes;
         let rusticSite = this.state.rustic;
     
-        fetch(`http://localhost:4000/tripList/${tripId}`, {
+        fetch(`https://micampfire.herokuapp.com/tripList/${tripId}`, {
             method: "PUT",
             headers: new Headers({
             "Content-Type": "application/json",

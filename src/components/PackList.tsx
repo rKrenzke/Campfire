@@ -30,7 +30,7 @@ class PackList extends React.Component<PackProps, PackState>{
     }
     
     deletePackItem = (item: any) => {
-        fetch(`http://localhost:4000/packList/${item.id}`, {
+        fetch(`https://micampfire.herokuapp.com/packList/${item.id}`, {
             method: "DELETE",
             headers: new Headers({
             "Content-Type": "application/json",
@@ -48,7 +48,7 @@ class PackList extends React.Component<PackProps, PackState>{
 
     updatePackItem = () => {
         let newItem = this.state.itemToUpdate;
-        fetch(`http://localhost:4000/packList/${this.state.itemId}`, {
+        fetch(`https://micampfire.herokuapp.com/packList/${this.state.itemId}`, {
         method: "PUT",
         headers: new Headers({
         "Content-Type": "application/json",

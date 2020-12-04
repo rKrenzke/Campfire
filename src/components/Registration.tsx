@@ -56,7 +56,7 @@ class HandleSubmit extends React.Component<AcceptProps, UserState> {
   
       if (password !== passwordConfirm) throw "Passwords do not match";
       
-      fetch("http://localhost:4000/user/register", {
+      fetch("https://micampfire.herokuapp.com/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

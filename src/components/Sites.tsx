@@ -44,7 +44,7 @@ class MySites extends React.Component<AcceptProps, SearchState>{
 
   fetchAllSites = () => {
     if(this.props.token){
-      fetch("http://localhost:4000/tripList/all", {
+      fetch("https://micampfire.herokuapp.com/tripList/all", {
         method: "GET",
         headers: new Headers({
           "Content-Type": "application/json",
@@ -58,7 +58,7 @@ class MySites extends React.Component<AcceptProps, SearchState>{
     }
 
   deleteTrip = (trip:any) => {
-    fetch(`http://localhost:4000/tripList/${trip.id}`, {
+    fetch(`https://micampfire.herokuapp.com/tripList/${trip.id}`, {
         method: "DELETE",
         headers: new Headers({
         "Content-Type": "application/json",

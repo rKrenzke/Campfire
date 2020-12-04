@@ -86,7 +86,7 @@ class Search extends React.Component<AcceptProps, SearchState>{
         let siteImage = null;
        
         // console.log(site);
-        fetch("http://localhost:4000/tripList/new", {
+        fetch("https://micampfire.herokuapp.com/tripList/new", {
             method: "POST",
             headers: new Headers({
                 "Content-Type": "application/json",
