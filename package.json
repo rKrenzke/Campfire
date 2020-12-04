@@ -55,7 +55,6 @@
     "file-loader": "^6.2.0",
     "source-map-loader": "^1.1.3",
     "ts-loader": "^8.0.11",
-    "webpack": "4.44.2",
     "webpack-cli": "^4.2.0"
   }
 }
