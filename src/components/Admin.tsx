@@ -29,7 +29,7 @@ class Admin extends React.Component<Props, AdminState>{
     // }
 
     fetchAllUsers(){
-        fetch("http://localhost:4000/user/admin", {
+        fetch("https://micampfire.herokuapp.com/user/admin", {
             method: "GET",
             headers: new Headers({
               "Content-Type": "application/json",
@@ -42,7 +42,7 @@ class Admin extends React.Component<Props, AdminState>{
     }
 
     modifyAdminStatus(user: any){
-        fetch(`http://localhost:4000/user/admin/${user.id}`, {
+        fetch(`https://micampfire.herokuapp.com/user/admin/${user.id}`, {
             method: "PUT", 
             headers: new Headers({
               "Content-Type": "application/json",
@@ -57,7 +57,7 @@ class Admin extends React.Component<Props, AdminState>{
     
 
     deleteUserFunction(user: any){
-        fetch(`http://localhost:4000/user/admin/${user.id}`, {
+        fetch(`https://micampfire.herokuapp.com/user/admin/${user.id}`, {
             method: "DELETE",
             headers: new Headers({
               "Content-Type": "application/json",
