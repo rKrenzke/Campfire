@@ -74,7 +74,7 @@ class PackList extends React.Component<PackProps, PackState>{
     render(){
         return(
             this.props.packList.map((item: any, index) => {
-                return <tr>
+                return <tr key={index}>
                     <td>{item.packItem}</td>
                     <td>{item.who}</td>
                     <div id="packListButtons">
