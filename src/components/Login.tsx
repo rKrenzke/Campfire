@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import {Form, FormGroup, Label, Input, Button, Modal, ModalBody, ModalHeader, ModalFooter,} from "reactstrap";
+import APIURL from '../helpers/environment';
 
 
 type PassedProps ={
@@ -32,7 +33,7 @@ class Login extends React.Component<PassedProps, UserState> {
     event.preventDefault();
     let username = this.state.username;
     let password = this.state.password;
-    fetch("https://micampfire.herokuapp.com/user/login", {
+    fetch(`${APIURL}/user/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

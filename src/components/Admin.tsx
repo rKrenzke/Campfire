@@ -1,6 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import {Button} from 'reactstrap';
+import APIURL from '../helpers/environment';
 
 type Props={
     isAdmin: boolean;
@@ -29,7 +30,7 @@ class Admin extends React.Component<Props, AdminState>{
     // }
 
     fetchAllUsers(){
-        fetch("https://micampfire.herokuapp.com/user/admin", {
+        fetch(`${APIURL}/user/admin`, {
             method: "GET",
             headers: new Headers({
               "Content-Type": "application/json",
@@ -42,7 +43,7 @@ class Admin extends React.Component<Props, AdminState>{
     }
 
     modifyAdminStatus(user: any){
-        fetch(`https://micampfire.herokuapp.com/user/admin/${user.id}`, {
+        fetch(`${APIURL}/user/admin/${user.id}`, {
             method: "PUT", 
             headers: new Headers({
               "Content-Type": "application/json",
@@ -57,7 +58,7 @@ class Admin extends React.Component<Props, AdminState>{
     
 
     deleteUserFunction(user: any){
-        fetch(`https://micampfire.herokuapp.com/user/admin/${user.id}`, {
+        fetch(`${APIURL}/user/admin/${user.id}`, {
             method: "DELETE",
             headers: new Headers({
               "Content-Type": "application/json",

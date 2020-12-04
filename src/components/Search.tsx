@@ -2,6 +2,7 @@ import React from 'react';
 import {Container, Button, Col, CardImg, Card, CardBody, CardHeader, Row, CardFooter} from 'reactstrap';
 import '../styles/Search.css';
 import NotFound from '../assets/imageNotFound.png';
+import APIURL from '../helpers/environment';
 import Extras from './Extras';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faFire, faMapPin, faShower, faSignal, faTint, faToilet} from '@fortawesome/free-solid-svg-icons'
@@ -86,7 +87,7 @@ class Search extends React.Component<AcceptProps, SearchState>{
         let siteImage = null;
        
         // console.log(site);
-        fetch("https://micampfire.herokuapp.com/tripList/new", {
+        fetch(`${APIURL}/tripList/new`, {
             method: "POST",
             headers: new Headers({
                 "Content-Type": "application/json",

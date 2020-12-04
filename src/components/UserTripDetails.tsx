@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Card, CardFooter, Col, Input, CardHeader, CardBody, Form, Button} from 'reactstrap';
 import PackList from './PackList';
+import APIURL from '../helpers/environment';
 
 type AcceptedProps ={
     site: any,
@@ -39,7 +40,7 @@ class UserTripDetails extends Component<AcceptedProps, TripState>{
     fetchPackList = (trip: number) => {
         let tripId = trip;
         if(this.props.token){
-          fetch(`https://micampfire.herokuapp.com/packList/getList/${tripId}`, {
+          fetch(`${APIURL}/packList/getList/${tripId}`, {
             method: "GET",
             headers: new Headers({
               "Content-Type": "application/json",
@@ -61,7 +62,7 @@ class UserTripDetails extends Component<AcceptedProps, TripState>{
         let packItem = item;
         // let userName = this.props.user
     
-        fetch("https://micampfire.herokuapp.com/packList/newPackList", {
+        fetch(`${APIURL}/packList/newPackList`, {
             method: "POST",
             headers: new Headers({
             "Content-Type": "application/json",
@@ -91,7 +92,7 @@ class UserTripDetails extends Component<AcceptedProps, TripState>{
         let fireRestrictions = this.state.fireRes;
         let rusticSite = this.state.rustic;
     
-        fetch(`https://micampfire.herokuapp.com/tripList/${tripId}`, {
+        fetch(`${APIURL}/tripList/${tripId}`, {
             method: "PUT",
             headers: new Headers({
             "Content-Type": "application/json",

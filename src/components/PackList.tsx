@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Modal, ModalBody, Input} from 'reactstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faMinusCircle, faPenAlt, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import APIURL from '../helpers/environment';
 
 type PackProps={
     packList: Array<object>;
@@ -30,7 +31,7 @@ class PackList extends React.Component<PackProps, PackState>{
     }
     
     deletePackItem = (item: any) => {
-        fetch(`https://micampfire.herokuapp.com/packList/${item.id}`, {
+        fetch(`${APIURL}/packList/${item.id}`, {
             method: "DELETE",
             headers: new Headers({
             "Content-Type": "application/json",
@@ -48,7 +49,7 @@ class PackList extends React.Component<PackProps, PackState>{
 
     updatePackItem = () => {
         let newItem = this.state.itemToUpdate;
-        fetch(`https://micampfire.herokuapp.com/packList/${this.state.itemId}`, {
+        fetch(`${APIURL}/packList/${this.state.itemId}`, {
         method: "PUT",
         headers: new Headers({
         "Content-Type": "application/json",

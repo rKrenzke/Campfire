@@ -11,6 +11,7 @@ import {
     ModalHeader,
     ModalFooter,
   } from "reactstrap";
+import APIURL from '../helpers/environment';
 
 type AcceptProps ={
     updateToken: (token: string) => void,
@@ -56,7 +57,7 @@ class HandleSubmit extends React.Component<AcceptProps, UserState> {
   
       if (password !== passwordConfirm) throw "Passwords do not match";
       
-      fetch("https://micampfire.herokuapp.com/user/register", {
+      fetch(`${APIURL}/user/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

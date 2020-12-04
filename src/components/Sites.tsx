@@ -5,6 +5,7 @@ import {
 } from "reactstrap";
 import PackList from './PackList';
 import UserTripDetails from './UserTripDetails';
+import APIURL from '../helpers/environment';
 // import { useToasts } from "react-toast-notifications";
 
 
@@ -44,7 +45,7 @@ class MySites extends React.Component<AcceptProps, SearchState>{
 
   fetchAllSites = () => {
     if(this.props.token){
-      fetch("https://micampfire.herokuapp.com/tripList/all", {
+      fetch(`${APIURL}/tripList/all`, {
         method: "GET",
         headers: new Headers({
           "Content-Type": "application/json",
@@ -58,7 +59,7 @@ class MySites extends React.Component<AcceptProps, SearchState>{
     }
 
   deleteTrip = (trip:any) => {
-    fetch(`https://micampfire.herokuapp.com/tripList/${trip.id}`, {
+    fetch(`${APIURL}/tripList/${trip.id}`, {
         method: "DELETE",
         headers: new Headers({
         "Content-Type": "application/json",
