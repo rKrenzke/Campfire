@@ -68,7 +68,6 @@ class Search extends React.Component<AcceptProps, SearchState>{
     }
 
     closeExtrasModal(){
-        console.log("hitting?")
         this.setState({extrasModal: false})
     }
 
@@ -128,18 +127,20 @@ class Search extends React.Component<AcceptProps, SearchState>{
                 {console.log(this.state.allSites)}
                 {this.state.allSites ? this.state.allSites.data.map((site: any, index: any) =>{ 
                     return <Container id="siteResults">
-                    <Card>
-                        <CardHeader>
+                    <Card className="border-0">
+                        <CardHeader id="cardHeader">
                             <th>{`${site.name} - ${site.addresses[0].city}`}</th>
                         </CardHeader>
                         <CardBody>
                             <Row>                          
                             <Col className="col-md-3">
-                            {site.images.length === 0 ? <img src={NotFound} className="img-fluid" alt="imageNotFound"/> : <img id="siteImage" src={site.images[0].url} className="img-fluid" alt="Campsite"/>}
+                                <div id="mainImage">
+                                    {site.images.length === 0 ? <img src={NotFound} className="img-fluid" alt="imageNotFound"/> : <img id="siteImage" src={site.images[0].url} className="img-fluid" alt="Campsite"/>}
+                                </div>
                             </Col>
                             <Col className="col-md-4">
                             <p>{site.description ? site.description : "Site description not available"}</p>
-                            <tr><a href={site.url} target="blank">Park Website</a></tr>
+                                <tr><a href={site.url} target="blank">Things to Do at {site.name} </a></tr>
                             </Col>
                             <Col className="col-md-5">                                                           
                             <table>
@@ -153,38 +154,37 @@ class Search extends React.Component<AcceptProps, SearchState>{
                                         <td>{site.operatingHours.length > 0 ? site.operatingHours[0].description : "Contact for operating hours"}</td>
                                     </tr>
                                     <hr/>
-                                    <tr>
-                                        <td><b>Total Sites:</b> {site.campsites.totalSites ? site.campsites.totalSites : "Contact for available sites"}</td>
-                                    </tr>
-                                    <hr/>
-                                </tbody>
-                            </table>
-                            <div>
-                                <th>Amenities:</th>
-                                <div id="amenitiesIcons">
+                                    <div>
+                                    <th>Amenities:</th>
+                                    <div id="amenitiesIcons">
                                     {site.amenities.cellPhoneReception == "No" ? <div id="noSignal" title="No cellphone signal"><FontAwesomeIcon icon={faSignal}></FontAwesomeIcon></div> : <div id="signal" title="Cellphone signal available"><FontAwesomeIcon icon={faSignal}></FontAwesomeIcon></div>}
                                     {site.amenities.firewoodForSale == "No" ? <div id="noFirewood" title="No firewood for sale"><FontAwesomeIcon icon={faFire}></FontAwesomeIcon></div> : <div id="fire" title="Firewood for sale"><FontAwesomeIcon icon={faFire}></FontAwesomeIcon></div>}
                                     {site.amenities.potableWater[0] ? <div id="water" title="Potable water available"><FontAwesomeIcon icon={faTint}></FontAwesomeIcon></div> : <div id="noWater" title="No potable water"><FontAwesomeIcon icon={faTint}></FontAwesomeIcon></div>}
                                     {site.amenities.showers[0] == "None" ? <div id="noShower" title="No shower facilities"><FontAwesomeIcon icon={faShower}></FontAwesomeIcon></div> : <div id="shower" title="Shower facilities available"><FontAwesomeIcon icon={faShower}></FontAwesomeIcon></div>}
-                                    {site.amenities.toilets[0] ? <div id="toilet" title="Toilets available"><FontAwesomeIcon icon={faToilet}></FontAwesomeIcon></div> : <div id="noToilet" title="No toilets available"><FontAwesomeIcon icon={faToilet}></FontAwesomeIcon></div>}
-                                    
-                                </div>
-                            </div>
-                            <hr/>
-                            <div className="moreInfoButtons">
-                                <Button onClick={() => this.extrasModal(site.parkCode)}>Things To Do</Button>
-                                {this.props.token ? <Button onClick={() => this.createNewTrip(site)} value={site}>Save Campsite</Button> : <></> }
-                                
-                            </div>
+                                    {site.amenities.toilets[0] ? <div id="toilet" title="Toilets available"><FontAwesomeIcon icon={faToilet}></FontAwesomeIcon></div> : <div id="noToilet" title="No toilets available"><FontAwesomeIcon icon={faToilet}></FontAwesomeIcon></div>}                                   
+                                        </div>
+                                    </div>                                   
+                                    <hr/>
+                                </tbody>
+                            </table>
+                                    <tr>
+                                        <td><b>Total Sites:</b> {site.campsites.totalSites ? site.campsites.totalSites : "Contact for available sites"}</td>
+                                        <td className="moreInfoButtons">
+                                            <div >
+                                                {/* <Button onClick={() => this.extrasModal(site.parkCode)}>Things To Do</Button> */}
+                                                {this.props.token ? <Button className="saveTripButton" onClick={() => this.createNewTrip(site)} value={site}>Save Campsite</Button> : <></> }              
+                                            </div>
+                                        </td>
+                                    </tr>                            
                         </Col>
                     </Row>
                         </CardBody>
                     </Card>                   
                 </Container>}) : <></>}
                     <Extras modalOpen={this.state.extrasModal} parkCode={this.state.parkCode} closeModal={this.closeExtrasModal}/>
-                <div id="pageButtons">
-                    <Button onClick={this.previousPage}>Previous Sites</Button>
-                    <Button onClick={this.nextPage}>More Sites</Button>
+                <div className="pageButtons">
+                    {this.state.pageNumber == 1 ? <></> : <Button className="page" onClick={this.previousPage}><text>&#8592;</text> Last Sites </Button>}
+                    <Button className="page" onClick={this.nextPage}>More Sites <text>&#8594;</text> </Button>
                 </div>
                 </div>
             </div>

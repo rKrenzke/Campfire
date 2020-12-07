@@ -1,7 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import {Form, FormGroup, Label, Input, Button, Modal, ModalBody, ModalHeader, ModalFooter,} from "reactstrap";
+import {Form, FormGroup, Label, Input, Button, Modal, ModalBody, ModalHeader, ModalFooter, Row} from "reactstrap";
 import APIURL from '../helpers/environment';
+import '../styles/Login.css';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faHiking} from '@fortawesome/free-solid-svg-icons'
 
 
 type PassedProps ={
@@ -59,14 +62,13 @@ class Login extends React.Component<PassedProps, UserState> {
     }
     render(){
       return(
-        <div id="login" role="navigation">
+        <div className="login" role="navigation">
           <Modal isOpen={this.props.open} id="loginModal">
-            <ModalHeader className="modalHeader">
-                <div id="mainTitle">Welcome Back!</div>
-                <Button className="closeModal" onClick={this.props.close}><span>x</span></Button>
+            <ModalHeader id="modalHeader">
+              <button type="button" className="close" onClick={this.props.close}>&times;</button>
+              <h5 id="mainTitle">Welcome Back!</h5>
             </ModalHeader>
             <ModalBody id="modalBody">
-              <div id="modalImage"></div>
                 <div id="modalForm">
                   <Form id="loginForm" onSubmit={this.handleSubmit}>
                     <FormGroup>
@@ -82,7 +84,7 @@ class Login extends React.Component<PassedProps, UserState> {
         </ModalBody>
         <ModalFooter className="modalFooter">
           <Button form="loginForm" id="modalSubmitButton" type="submit">
-            Login
+            Login <FontAwesomeIcon icon={faHiking}></FontAwesomeIcon>
           </Button>{" "}
         </ModalFooter>
       </Modal>

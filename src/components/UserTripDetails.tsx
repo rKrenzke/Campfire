@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Card, CardFooter, Col, Input, CardHeader, CardBody, Form, Button} from 'reactstrap';
 import PackList from './PackList';
 import APIURL from '../helpers/environment';
+import '../styles/Sites.css';
 
 type AcceptedProps ={
     site: any,
@@ -114,7 +115,7 @@ class UserTripDetails extends Component<AcceptedProps, TripState>{
   }
     render(){
         return(
-            <Card className="tripCard" key={this.props.index}>
+            <Card id="tripCards" className="tripCard border-0" key={this.props.index}>
                     <CardHeader className="cardHeader">
                       <b>{this.props.site.campsiteName}</b>
                     </CardHeader>

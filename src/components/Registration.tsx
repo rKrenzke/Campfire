@@ -81,12 +81,11 @@ class HandleSubmit extends React.Component<AcceptProps, UserState> {
     return(
         <div id="register" role="navigation">
             <Modal isOpen={this.props.open} id="registerModal">
-                <ModalHeader className="modalHeader">
-                    <div id="mainTitle">Welcome to Campfire</div>
-                    <Button className="closeModal" onClick={this.props.close}><span>x</span></Button>
-                </ModalHeader>
+            <ModalHeader id="modalHeader">
+              <button type="button" className="close" onClick={this.props.close}>&times;</button>
+              <h5 id="mainTitle">Welcome to MIcampfire!</h5>
+            </ModalHeader>
                 <ModalBody id="modalBody">
-                    <div id="modalImage"></div>
                     <div id="modalForm">
                   <Form id="registerForm" onSubmit={this.handleSubmit} >
           <FormGroup>

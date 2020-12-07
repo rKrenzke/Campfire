@@ -1,0 +1,39 @@
+.adminDiv{
+    background-color: rgb(136, 139, 133);
+    margin-top: -5%;
+    height: 150vh;
+}
+
+
+#manageUsersTable{
+    width: 80%;
+    position: absolute;
+    background-color: whitesmoke;
+    margin-top: 6%;
+    font-family: 'Monserrat', sans-serif;
+}
+
+#tableTitle{
+    font-size: 23px;
+    font-family: 'Lobster', cursive;
+    text-align: center;
+    text-shadow: 1px 1px rgb(182, 176, 176);
+    padding: 10px;
+}
+
+.alignCenter{
+    text-align: center;
+}
+#privileges{
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.check{
+    color: green;
+}
+
+.x{
+    color: red;
+}

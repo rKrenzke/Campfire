@@ -1,7 +1,9 @@
-import userEvent from '@testing-library/user-event';
 import React from 'react';
-import {Button} from 'reactstrap';
+import {Button, Table, Container} from 'reactstrap';
 import APIURL from '../helpers/environment';
+import "../styles/Admin.css";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faUserSlash, faPencilAlt} from '@fortawesome/free-solid-svg-icons'
 
 type Props={
     isAdmin: boolean;
@@ -23,11 +25,6 @@ class Admin extends React.Component<Props, AdminState>{
             allUsers: []
         }
     }
-
-    // componentDidMount(){
-    //     this.fetchAllUsers();
-    //     console.log(this.props.isAdmin)
-    // }
 
     fetchAllUsers(){
         fetch(`${APIURL}/user/admin`, {
@@ -74,30 +71,33 @@ class Admin extends React.Component<Props, AdminState>{
 
     render(){
         return(
+            <div className="adminDiv">
+            <Container>
             <div id="manageUsersTable">
-                <thead>
-                    User Management Options
-                </thead>
+                <Table>
+                    <h4 id="tableTitle">User Management Options</h4>                 
                 <tbody>
                     <tr>
                         <th>User</th>
                         <th>Email</th>
-                        <th>Admin Privileges</th>
-                        <th>Modify Privileges</th>
-                        <th>Delete User</th>
+                        <th className="alignCenter">Admin Privileges</th>
+                        <th className="alignCenter">Modify Privileges</th>
+                        <th className="alignCenter">Delete User</th>
                     </tr>
                     {this.state.allUsers.length > 0 ? this.state.allUsers.map((user: any) => {
                         return <tr>
                                 <td>{user.username}</td>
                                 <td>{user.email}</td>
-                                <td>{user.isAdmin == true ? "Yes" : "No"}</td>
-                                <td><Button color="info" onClick={() => this.modifyAdminStatus(user)}>Modify</Button></td>
-                                <td><Button color="danger" onClick={() => this.deleteUserFunction(user)}>X</Button></td>
+                                <td id="privileges">{user.isAdmin == true ? <text className="check">&#10003;</text>: <text className="x">&times;</text>}</td>
+                                <td className="alignCenter"><Button color="info" onClick={() => this.modifyAdminStatus(user)}><FontAwesomeIcon icon={faPencilAlt}></FontAwesomeIcon></Button></td>
+                                <td className="alignCenter"><Button color="danger" onClick={() => this.deleteUserFunction(user)}><FontAwesomeIcon icon={faUserSlash}></FontAwesomeIcon></Button></td>
                             </tr>
                     }) : this.fetchAllUsers()}
                 </tbody>
+                </Table>
             </div>
-            
+                </Container>
+            </div>
         )
     }
     

@@ -6,6 +6,7 @@ import {
 import PackList from './PackList';
 import UserTripDetails from './UserTripDetails';
 import APIURL from '../helpers/environment';
+import '../styles/Sites.css';
 // import { useToasts } from "react-toast-notifications";
 
 
@@ -95,8 +96,8 @@ class MySites extends React.Component<AcceptProps, SearchState>{
 render(){
   {console.log(this.props.user)}
   return (
-    <div>
-      <div id="siteCards">
+    <div id="siteCards">
+      <div >
         <Container>
           <Col>
             {console.log(this.state.userTrips.length, this.state.userTrips)}

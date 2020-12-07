@@ -10,9 +10,9 @@ const HomePage = () => {
     <div className="mainDiv">
       <Container id="landingTitle">
         <h1 className="title"><span>MI</span>campfire</h1>
-        <div className="navButtons">
-        <Link to="/search"><Button>National Parks</Button></Link> {/*<FontAwesomeIcon icon={faMapPin}></FontAwesomeIcon>*/}
-        <Button>State Parks</Button>
+        <div className="homePageButtons">
+        <Link to="/search"><Button className="navButtons">National Parks</Button></Link> {/*<FontAwesomeIcon icon={faMapPin}></FontAwesomeIcon>*/}
+        <Button className="navButtons">State Parks</Button>
         </div>
       </Container>
     </div>
