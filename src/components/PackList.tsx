@@ -1,8 +1,9 @@
 import React from 'react';
-import {Button, Modal, ModalBody, Input} from 'reactstrap';
+import {Button, Modal, ModalBody, Input, ModalHeader} from 'reactstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import { faMinusCircle, faPenAlt, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import APIURL from '../helpers/environment';
+import '../styles/Sites.css';
 
 type PackProps={
     packList: Array<object>;
@@ -75,20 +76,22 @@ class PackList extends React.Component<PackProps, PackState>{
     render(){
         return(
             this.props.packList.map((item: any, index) => {
-                return <tr key={index}>
+                return <tr key={index} id="packRow">
                     <td>{item.packItem}</td>
                     <td>{item.who}</td>
                     <div id="packListButtons">
-                    <Button color="info" onClick={() => this.editPackItem(item)}><FontAwesomeIcon icon={faPencilAlt}></FontAwesomeIcon></Button>
-                    <Button color="danger" onClick={() => this.deletePackItem(item)}><FontAwesomeIcon icon={faMinusCircle}></FontAwesomeIcon></Button>
+                    <Button id="editPack" onClick={() => this.editPackItem(item)}><FontAwesomeIcon icon={faPencilAlt}></FontAwesomeIcon></Button>
+                    <Button id="deletePack" onClick={() => this.deletePackItem(item)}><FontAwesomeIcon icon={faMinusCircle}></FontAwesomeIcon></Button>
                     </div>
                     <div>
                         <Modal isOpen={this.state.editModal}>
+                            <ModalHeader id="modalHeader">
+                                <button type="button" className="close" onClick={() => this.setState({editModal: false})}>&times;</button>
+                                <h5 id="mainTitle">Edit Pack Item</h5>
+                            </ModalHeader>
                             <ModalBody>
-                                <h4>Edit Pack Item</h4>
-                                <Button onClick={() => this.setState({editModal: false})}>X</Button>
                                 <Input name="itemToEdit" type="text" placeholder={this.state.itemToUpdate} onChange={(e) => this.setState({itemToUpdate: e.target.value})}/>
-                                <Button onClick={() => this.updatePackItem()}>Save</Button>
+                                <Button id="modalSubmitButton" onClick={() => this.updatePackItem()}>Save</Button>
                             </ModalBody>
                         </Modal>
                     </div>

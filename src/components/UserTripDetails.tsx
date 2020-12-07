@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Card, CardFooter, Col, Input, CardHeader, CardBody, Form, Button} from 'reactstrap';
+import {Card, CardFooter, Col, Input, CardHeader, CardBody, Form, Button, Table} from 'reactstrap';
 import PackList from './PackList';
 import APIURL from '../helpers/environment';
 import '../styles/Sites.css';
@@ -9,7 +9,8 @@ type AcceptedProps ={
     index: number,
     deleteTrip: (tripId: number) => void,
     token: string
-    fetchAllSites: () => void 
+    fetchAllSites: () => void,
+    user: string
 }
 
 type TripState ={
@@ -19,7 +20,11 @@ type TripState ={
     recPass: boolean,
     fireRes: boolean,
     rustic: boolean,
-    packListItems: Array<object>
+    packListItems: Array<object>,
+    costPerNight: any,
+    campers: number,
+    nightLength: number,
+    totalFees: any
 }
 
 class UserTripDetails extends Component<AcceptedProps, TripState>{
@@ -27,6 +32,9 @@ class UserTripDetails extends Component<AcceptedProps, TripState>{
         super(props);
         this.updateTripInfo = this.updateTripInfo.bind(this);
         this.addPackItem = this.addPackItem.bind(this);
+        // this.handleFees = this.handleFees.bind(this);
+        this.handleCampers = this.handleCampers.bind(this);
+        this.handleNightLength = this.handleNightLength.bind(this);
         this.state={
             packList: '',
             packItem: '',
@@ -34,7 +42,11 @@ class UserTripDetails extends Component<AcceptedProps, TripState>{
             recPass: false,
             fireRes: false,
             rustic: false,
-            packListItems: []
+            packListItems: [],
+            costPerNight: "",
+            campers: 0,
+            nightLength: 0,
+            totalFees:""
         }
     }
 
@@ -73,7 +85,7 @@ class UserTripDetails extends Component<AcceptedProps, TripState>{
               packList: {
                 tripId, 
                 packItem, 
-              }, user: {userName: "MountainGoat220"}},
+              }, user: {userName: this.props.user}},
             )
             }).then((response) => response.json())
             .then((data) => {
@@ -81,6 +93,7 @@ class UserTripDetails extends Component<AcceptedProps, TripState>{
                 console.log(data.error.message);
               } else{
                   this.fetchPackList(tripId);
+                  this.setState({packItem: ''});
                   //TODO: add toast
               }
             });
@@ -113,6 +126,28 @@ class UserTripDetails extends Component<AcceptedProps, TripState>{
   handleChange(event:any){
     this.setState({packItem: event.target.value})
   }
+
+  handleFees(event:any){
+    console.log(event.target.value)
+    this.setState({costPerNight: event.target.value})
+  }
+
+  handleCampers(event:any){
+    this.setState({campers: event.target.value})
+  }
+
+  handleNightLength(event:any){
+    this.setState({nightLength: event.target.value})
+  }
+
+  calculateFees(x: number, y: number, z: number){
+    console.log(x);
+    console.log(y);
+    console.log(z);
+    let total = (x * z) / y;
+    this.setState({totalFees: total})
+  }
+
     render(){
         return(
             <Card id="tripCards" className="tripCard border-0" key={this.props.index}>
@@ -124,71 +159,77 @@ class UserTripDetails extends Component<AcceptedProps, TripState>{
                         <hr/>
                         <div className="row">
                         <Col className="col align-self-start">
-                          <Form>
-                            <h6>Fee Calculator</h6>
-                            <Input type="number" placeholder="Site fee per night"></Input>
-                            <Input type="number" placeholder="# of campers"></Input>
-                            <Input type="number" placeholder="# of nights"></Input>
-                          </Form>
+                            <h6 className="titleTag">Fee Calculator</h6>
+                          <div className="input-group">
+                            <input type="text" className="form-control" placeholder="$ per night" onChange={(event) => this.handleFees(event)}/>
+                            <input type="text" className="form-control" placeholder="# of campers" onChange={(event) => this.handleCampers(event)}/>
+                            <input type="text" className="form-control" placeholder="# of nights" onChange={(event) => this.handleNightLength(event)}/>
+                            <div className="input-group-append">
+                              <button className="btn btn-outline-secondary" type="button" onClick={() => this.calculateFees(this.state.costPerNight, this.state.campers, this.state.nightLength)}>Calculate</button>
+                            </div>
+                          </div>
+                            {this.state.totalFees ? <p>${this.state.totalFees} per person</p> : <></>}
                           <hr/>
                           <div className="input-group mb-3">
-                            <div className="input-group=prepend">
+                            <div className="input-group-prepend">
                               <div className="input-group-text">
                                 <input type="checkbox" checked={this.props.site.campsiteReserved ? true : false} aria-label="reservation" value="reservation" onChange={() => this.setState({campRes: true})}/>
                               </div>
                             </div>
-                            <label htmlFor="reservation">Campsite reserved</label>
+                            <label id="label" htmlFor="reservation">Campsite reserved</label>
                           </div>
                           <div className="input-group mb-3">
-                            <div className="input-group=prepend">
+                            <div className="input-group-prepend">
                               <div className="input-group-text">
                                 <input type="checkbox" checked={this.props.site.recreationPassport ? true : false} aria-label="recPassport" value="recPassport" onChange={()=>this.setState({recPass: true})}/>
                               </div>
                             </div>
-                            <label htmlFor="recPassport">Recreation Passport <i>(State parks only)</i></label>
+                            <label id="label" htmlFor="recPassport">Recreation Passport <i>(State parks only)</i></label>
                           </div>
                           <div className="input-group mb-3">
-                            <div className="input-group=prepend">
+                            <div className="input-group-prepend">
                               <div className="input-group-text">
                                 <input type="checkbox" checked={this.props.site.fireRestriction ? true : false} aria-label="reservation" value="reservation" onChange={()=>this.setState({fireRes: true})}/>
                               </div>
                             </div>
-                            <label htmlFor="reservation">Fire restrictions</label>
+                            <label id="label" htmlFor="reservation">Fire restrictions</label>
                           </div>
                           <div className="input-group mb-3">
-                            <div className="input-group=prepend">
+                            <div className="input-group-prepend">
                               <div className="input-group-text">
                                 <input type="checkbox" checked={this.props.site.rusticSite ? true : false} aria-label="rustic" value="rustic" onChange={()=>this.setState({rustic: true})}/>
                               </div>
                             </div>
-                            <label htmlFor="rustic">Rustic site</label>
+                            <label id="label" htmlFor="rustic">Rustic site</label>
                           </div>
-                          <Button onClick={() => this.updateTripInfo(this.props.site.id)}>Save Changes</Button>
+                          <Button id="saveChangesBtn" onClick={() => this.updateTripInfo(this.props.site.id)}>Save Changes</Button>
                         </Col>
-                        <Col className="col align-self-end">
-                          <table>
-                            <thead>Pack List</thead>
-                              <tr>
-                                <th>Item</th>
-                                <th>Who</th>
-                              </tr>
-                              {this.state.packListItems.length > 0 ? <PackList packList={this.state.packListItems} getItems={this.fetchPackList} token={this.props.token}/> : this.fetchPackList(this.props.site.id)}
-                              <tr>
-                                <input type="text" id="newItem" placeholder="Add new pack item" value={this.state.packItem} onChange={this.handleChange.bind(this)}/>
-                                <Button color="success" onClick={() => this.addPackItem(this.props.site.id, this.state.packItem )}> + </Button>
-                              </tr>
-                          </table>
+                        <Col className="col align-top">
+                          <Card id="packCard" className="border-0">
+                            <CardHeader className="card text-center header">
+                              <h4 className="titleTag">Pack List</h4>
+                            </CardHeader>
+                              <Table id="packTable">                               
+                                {this.state.packListItems.length > 0 ? <PackList packList={this.state.packListItems} getItems={this.fetchPackList} token={this.props.token}/> : this.fetchPackList(this.props.site.id)}
+                                <tr id="addButton">
+                                </tr>
+                              </Table>
+                              <CardFooter>
+                                  <input type="text" id="newItem" placeholder="Add new pack item" value={this.state.packItem} onChange={this.handleChange.bind(this)}/>
+                                  <Button id="addPackItem" onClick={() => this.addPackItem(this.props.site.id, this.state.packItem )}> &#43; </Button>
+                              </CardFooter>
+                          </Card>
                         </Col>
                         </div>
                     </CardBody>
                     <CardFooter className="cardFooter">
-                      <Col id="deleteCol" md="6">
-                        <Button
+                      <Col md="6">
+                        <Button id="deleteTripButton"
                           onClick={() => {
                             this.props.deleteTrip(this.props.site);
                           }}
                         >
-                          Delete
+                          Delete This Campsite
                         </Button>
                       </Col>
                     </CardFooter>

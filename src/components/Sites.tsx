@@ -97,13 +97,13 @@ render(){
   {console.log(this.props.user)}
   return (
     <div id="siteCards">
-      <div >
+      <div id="container">
         <Container>
           <Col>
             {console.log(this.state.userTrips.length, this.state.userTrips)}
              {this.state.userTrips.length ? (
               this.state.userTrips.map((site: any, index) => {
-                return <UserTripDetails site={site} index={index} token={this.props.token} deleteTrip={this.deleteTrip} fetchAllSites={this.fetchAllSites} />
+                return <UserTripDetails site={site} index={index} token={this.props.token} deleteTrip={this.deleteTrip} fetchAllSites={this.fetchAllSites} user={this.props.user} />
 
               })
             ) : this.fetchAllSites()} 

@@ -17,6 +17,148 @@
     margin-top: -5%;
 }
 
+#container{
+    padding-top: 1%;
+}
+
 #tripCards{
     margin-top: 6%;
+    font-family: 'Monserrat', sans-serif;
+}
+
+.titleTag{
+    font-family: 'Lobster', cursive;
+}
+
+#packCard{
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
+    0 100px 80px rgba(0, 0, 0, 0.07);
+    border-radius: 10px;
+}
+
+#packListButtons Button{
+    background: none;
+    border: none;
+}
+
+#editPack{
+    color: black;
+}
+
+#deletePack{
+    color: brown;
+}
+
+#addPackItem{
+    background-color: rgb(93, 170, 30);
+}
+
+.header{
+    text-align: center;
+    background-color: rgb(93, 170, 30);
+    text-shadow: 1px 1px 1px black;
+    color: whitesmoke;
+    border-bottom: 2px solid black;
+}
+
+#saveChangesBtn{
+    text-align: center;
+    background-color: rgb(93, 170, 30);
+    text-shadow: 1px 1px 1px black;
+    color: whitesmoke;
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
+    0 100px 80px rgba(0, 0, 0, 0.07);
+    
+}
+
+#label{
+    padding-left: 20px;
+}
+
+#deleteTripButton{
+    padding: .4em;
+    border: 1.5px solid black;
+    border-radius: .5em;
+    background: rgb(93, 170, 30);
+    transform-style: preserve-3d;
+    transition: all 175ms cubic-bezier(0, 0, 1, 1);
+}
+
+#deleteTripButton::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 90%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:  rgb(164, 165, 162);
+    border-radius: inherit;
+    transform: translate3d(0, 0.75em, -1em);
+    transition: all 175ms cubic-bezier(0, 0, 1, 1);
+}
+
+#deleteTripButton:hover {
+    background: rgb(167, 54, 2);
+    transform: translate(0, 0.375em);
+}
+
+#deleteTripButton:active {
+    transform: translate(0em, 0.75em);
+}
+
+
+#deleteTripButton:active::before {
+    transform: translate3d(0, 0, -1em);
+    /* box-shadow: 0 0 0 2px rgb(55, 180, 17), 0 0.25em 0 0 rgb(55, 180, 17); */ 
+}
+
+#modalSubmitButton{
+    background-color: rgb(93, 170, 30);
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
+    0 100px 80px rgba(0, 0, 0, 0.07);
+    text-shadow: 1px 1px black;
+    border: 1.5px solid black;
+    transition: 1s;
+    margin-top: .5em;
+}
+
+#modalSubmitButton:hover{
+    background-color: rgb(69, 129, 21);
+    transition: 1s;
+    transform: translate(3px, 3px);
+}
+
+#mainTitle{
+    font-family: 'Lobster', cursive;
+    font-size: 25px;
+    letter-spacing: .03em;
+}
+
+#modalBody{
+    font-family: 'Monserrat', sans-serif;
+}
+
+.modalFooter{
+    background: transparent;
+}
+
+#modalHeader{
+    background-color: rgb(69, 129, 21);
+    color: whitesmoke;
+    text-shadow: 2px 2px 3px black;
+    border: 0;
+    display: inline;
+    border-bottom: 2px solid black;
+}
+
+.modal-content{
+    border: 0;
 }
