@@ -1,6 +1,18 @@
-# Getting Started with Create React App
+# Getting Started with MI-Campfire
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Version 1.0 (Current)
+This app is designed for those looking to browse and save State and National Parks Service campsites they would like to visit in Michigan.  Users can register new accounts or login to an existing account to save a personal list of National Parks Service campsites they are interested in. Users can also create a custom pack list for each trip.
+
+Version 2.0
+- Expanded API functionality to include State Parks
+- Expanded trip sharing functionality where users can find and connect with friends, share saved trips, and individually update a shared packing list so everyone can see who is bringing which items.  Additional features may include ability to email finished pack list to campers, and expanded reservation funcationality.  
+
+Known Issues:
+- Checkboxes on user's saved sites page do not change visual appearence on click.  However, changes to these options are correctly logged and saved for the user's account.
+- If the user does not have any saved trips, the background sometimes appears blank when navigating to the My Campfires nav link.
+- The More Sites page button in the Search component takes two clicks initially to functional correctly.
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and uses TypeScript.
 
 ## Available Scripts
 
@@ -28,16 +40,6 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
 ## Learn More
 
