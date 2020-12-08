@@ -13,12 +13,13 @@
     background-size: fill;
     background-repeat: no-repeat;   
     width: 100vw;
-    /* height: 155vh; */
+    height: 140vh;
     margin-top: -5%;
 }
 
 #container{
     padding-top: 1%;
+    
 }
 
 #tripCards{
